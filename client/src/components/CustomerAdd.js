@@ -117,6 +117,7 @@ class CustomerAdd extends React.Component {
               value={this.state.fileName}
               onChange={this.handleFileChange}
             />
+            <br />
             <label htmlFor="raised-button-file">
               <Button
                 variant="contained"
@@ -130,6 +131,7 @@ class CustomerAdd extends React.Component {
               </Button>
             </label>
             <br />
+            <br />
             <TextField
               label="이름"
               type="text"
@@ -137,6 +139,7 @@ class CustomerAdd extends React.Component {
               value={this.state.userName}
               onChange={this.handleValueChange}
             />
+            <br />
             <br />
             <TextField
               label="생년월일"
@@ -146,6 +149,7 @@ class CustomerAdd extends React.Component {
               onChange={this.handleValueChange}
             />
             <br />
+            <br />
             <TextField
               label="성별"
               type="text"
@@ -153,6 +157,7 @@ class CustomerAdd extends React.Component {
               value={this.state.gender}
               onChange={this.handleValueChange}
             />
+            <br />
             <br />
             <TextField
               label="직업"

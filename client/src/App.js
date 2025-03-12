@@ -10,18 +10,75 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import CircularProgress from "@mui/material/CircularProgress";
 import { withStyles } from "@mui/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 
 const styles = () => ({
   root: {
     width: "100%",
-    marginTop: 24,
-    overflowX: "auto",
-  },
-  table: {
     minWidth: 1080,
+  },
+  menu: {
+    marginTop: 15,
+    marginBottom: 15,
+    marginRight: 15,
+    display: "flex",
+    justifyContent: "right",
+  },
+  paper: {
+    marginLeft: 18,
+    marginRight: 18,
   },
   progress: {
     margin: 16,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  tableHead: {
+    fontSize: "1.0rem",
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  title: {
+    display: "block",
+  },
+  search: {
+    position: "relative",
+    borderRadius: 5,
+    backgroundColor: "rgb(255 255 255 / 15%)",
+    "&:hover": {
+      backgroundColor: "rgb(255 255 255 / 25%)",
+    },
+    marginLeft: 8,
+    width: "auto",
+  },
+  searchIcon: {
+    width: 72,
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    paddingTop: 8,
+    paddingRight: 8,
+    paddingBottom: 8,
+    paddingLeft: 80,
+    color: "inherit",
+    width: "100%",
+  },
+  inputInput: {
+    width: 120,
   },
 });
 
@@ -64,19 +121,64 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
+    const cellList = [
+      "번호",
+      "프로필 이미지",
+      "이름",
+      "생년월일",
+      "성별",
+      "직업",
+      "설정",
+    ];
     return (
-      <div>
-        <Paper className={classes.root}>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Open drawer"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              className={classes.title}
+              variant="h6"
+              color="inherit"
+              noWrap
+            >
+              고객 관리 시스템
+            </Typography>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="검색하기"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                name="searchKeyword"
+                value={this.state.searchKeyword}
+                onChange={this.handleValueChange}
+              />
+            </div>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.menu}>
+          <CustomerAdd stateRefresh={this.stateRefresh} />
+        </div>
+        <Paper className={classes.paper}>
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>번호</TableCell>
-                <TableCell>이미지</TableCell>
-                <TableCell>이름</TableCell>
-                <TableCell>생년월일</TableCell>
-                <TableCell>성별</TableCell>
-                <TableCell>직업</TableCell>
-                <TableCell>설정</TableCell>
+                {cellList.map((c) => {
+                  return (
+                    <TableCell className={classes.tableHead}>{c}</TableCell>
+                  );
+                })}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -109,7 +211,6 @@ class App extends Component {
             </TableBody>
           </Table>
         </Paper>
-        <CustomerAdd stateRefresh={this.stateRefresh} />
       </div>
     );
   }
